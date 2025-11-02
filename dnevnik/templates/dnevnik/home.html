@@ -1,0 +1,30 @@
+{% extends 'dnevnik/base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+        <div class="jumbotron bg-light p-5 rounded">
+            <h1 class="display-4">Добро пожаловать в личный дневник!</h1>
+            <p class="lead">Записывайте свои мысли, идеи и воспоминания в безопасном и приватном пространстве.</p>
+            <hr class="my-4">
+            {% if user.is_authenticated %}
+                <p>Рады видеть вас снова, {{ user.username }}!</p>
+                <a class="btn btn-primary btn-lg" href="{% url 'dnevnik:list' %}" role="button">
+                    <i class="fas fa-list"></i> Мои записи
+                </a>
+                <a class="btn btn-success btn-lg" href="{% url 'dnevnik:diary_create' %}" role="button">
+                    <i class="fas fa-plus"></i> Новая запись
+                </a>
+            {% else %}
+                <p>Начните вести свой дневник уже сегодня!</p>
+                <a class="btn btn-primary btn-lg" href="{% url 'users:register' %}" role="button">
+                    <i class="fas fa-user-plus"></i> Зарегистрироваться
+                </a>
+                <a class="btn btn-outline-secondary btn-lg" href="{% url 'users:login' %}" role="button">
+                    <i class="fas fa-sign-in-alt"></i> Войти
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

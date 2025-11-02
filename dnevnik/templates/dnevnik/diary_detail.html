@@ -1,0 +1,72 @@
+{% extends 'dnevnik/base.html' %}
+
+{% block title %}{{ diary.title }}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow">
+            <div class="card-header bg-light">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h1 class="h3 mb-0">{{ diary.title }}</h1>
+                    <div class="btn-group">
+                        <a href="{% url 'dnevnik:diary_update' diary.pk %}" class="btn btn-sm btn-outline-primary">
+                            <i class="bi bi-pencil"></i> Редактировать
+                        </a>
+                        <button type="button" class="btn btn-sm btn-outline-danger"
+                                data-bs-toggle="modal" data-bs-target="#deleteModal">
+                            <i class="bi bi-trash"></i> Удалить
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="diary-meta mb-4">
+                    <small class="text-muted">
+                        <i class="bi bi-calendar"></i> Создано: {{ diary.created_at|date:"d.m.Y H:i" }}
+                    </small>
+                    {% if diary.updated_at != diary.created_at %}
+                        <br>
+                        <small class="text-muted">
+                            <i class="bi bi-arrow-clockwise"></i>
+                            Обновлено: {{ diary.updated_at|date:"d.m.Y H:i" }}
+                        </small>
+                    {% endif %}
+                </div>
+
+                <div class="diary-content">
+                    {{ diary.content|linebreaks }}
+                </div>
+            </div>
+            <div class="card-footer bg-transparent">
+                <a href="{% url 'dnevnik:list' %}" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left"></i> Назад к списку
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно подтверждения удаления -->
+<div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Подтверждение удаления</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Вы уверены, что хотите удалить запись "{{ diary.title }}"?</p>
+                <p class="text-danger"><small>Это действие нельзя отменить.</small></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                <form method="post" action="{% url 'dnevnik:delete' diary.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Удалить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
