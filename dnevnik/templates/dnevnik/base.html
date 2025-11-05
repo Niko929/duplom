@@ -48,18 +48,18 @@
                             </span>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'users:logout' %}">
+                            <a class="nav-link" href="{% url 'logout' %}">
                                 <i class="fas fa-sign-out-alt"></i> Выйти
                             </a>
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'users:login' %}">
+                            <a class="nav-link" href="{% url 'login' %}">
                                 <i class="fas fa-sign-in-alt"></i> Войти
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'users:register' %}">
+                            <a class="nav-link" href="{% url 'register' %}">
                                 <i class="fas fa-user-plus"></i> Регистрация
                             </a>
                         </li>

@@ -4,11 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5a2af23f-7ad3-4032-872e-e8baa129d9a6" name="Changes" comment="начало">
+    <list default="true" id="5a2af23f-7ad3-4032-872e-e8baa129d9a6" name="Changes" comment="продолжение">
       <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dnevnik/templates/dnevnik/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/dnevnik/templates/dnevnik/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dnevnik/templates/dnevnik/diary_create.html" beforeDir="false" afterPath="$PROJECT_DIR$/dnevnik/templates/dnevnik/diary_create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dnevnik/templates/dnevnik/diary_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/dnevnik/templates/dnevnik/diary_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dnevnik/templates/dnevnik/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/dnevnik/templates/dnevnik/list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dnevnik/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/dnevnik/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dnevnik/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/dnevnik/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/templates/users/logout.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/logout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +64,7 @@
     &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;moy__dnevnik&quot;
+    &quot;git-widget-placeholder&quot;: &quot;#1 on moy__dnevnik&quot;
   }
 }</component>
   <component name="SharedIndexes">
@@ -83,11 +91,20 @@
       <option name="project" value="LOCAL" />
       <updated>1762096178366</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="продолжение">
+      <option name="closed" value="true" />
+      <created>1762097747614</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1762097747614</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="начало" />
-    <option name="LAST_COMMIT_MESSAGE" value="начало" />
+    <MESSAGE value="продолжение" />
+    <option name="LAST_COMMIT_MESSAGE" value="продолжение" />
   </component>
 </project>

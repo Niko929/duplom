@@ -10,7 +10,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <h1 class="h3 mb-0">{{ diary.title }}</h1>
                     <div class="btn-group">
-                        <a href="{% url 'dnevnik:diary_update' diary.pk %}" class="btn btn-sm btn-outline-primary">
+                        <a href="{% url 'dnevnik:edit' diary.pk %}" class="btn btn-sm btn-outline-primary">
                             <i class="bi bi-pencil"></i> Редактировать
                         </a>
                         <button type="button" class="btn btn-sm btn-outline-danger"

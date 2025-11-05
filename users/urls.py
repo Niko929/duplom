@@ -7,11 +7,12 @@ from users.forms import EmailAuthenticationForm
 app_name = 'users'
 
 urlpatterns = [
-    path('register/', RegisterView.as_view(), name='register'),
-    path('login/', CustomLoginView.as_view(), name='login'),
-    path('logout/', CustomLogoutView.as_view(), name='logout'),
     path('login/', auth_views.LoginView.as_view(
-        form_class=EmailAuthenticationForm,
         template_name='registration/login.html'
     ), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(
+        template_name='registration/logged_out.html'
+    ), name='logout'),
+    # Регистрация
+    path('signup/', auth_views.SignUpView.as_view(), name='signup'),
 ]

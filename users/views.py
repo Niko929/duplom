@@ -1,7 +1,7 @@
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.messages.views import SuccessMessageMixin
-from django.contrib.auth import login
-from django.shortcuts import redirect
+from django.contrib.auth import login, logout
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from dnevnik.forms import CustomUserCreationForm
@@ -30,12 +30,14 @@ class CustomLoginView(SuccessMessageMixin, LoginView):
 
 # Выход с использованием auth_views.LogoutView
 class CustomLogoutView(LogoutView):
-    next_page = reverse_lazy('home')
+    def get(self, request):
+        # Для GET запроса показываем страницу подтверждения
+        return render(request, 'registration/logout_confirm.html')
 
-    def dispatch(self, request, *args, **kwargs):
-        from django.contrib import messages
-        messages.success(request, 'Вы успешно вышли из системы!')
-        return super().dispatch(request, *args, **kwargs)
+    def post(self, request):
+        # Для POST запроса выполняем выход
+        logout(request)
+        return redirect('home')
 
 
 class SignUpView(CreateView):

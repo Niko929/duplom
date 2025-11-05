@@ -18,9 +18,20 @@ class DiaryListView(LoginRequiredMixin, ListView):
     paginate_by = 9
 
     def get_queryset(self):
-        return DiaryEntry.objects.filter(
+        queryset = DiaryEntry.objects.filter(
             author=self.request.user
         ).order_by('-created_at')
+
+        # ОТЛАДКА
+        print("=" * 50)
+        print(f"🔍 Пользователь: {self.request.user}")
+        print(f"🔍 Аутентифицирован: {self.request.user.is_authenticated}")
+        print(f"🔍 Найдено записей: {queryset.count()}")
+        for diary in queryset:
+            print(f"📝 {diary.id}: {diary.title} - {diary.created_at}")
+        print("=" * 50)
+
+        return queryset
 
 class DiaryDetailView(LoginRequiredMixin, DetailView):
     model = DiaryEntry
@@ -37,8 +48,15 @@ class DiaryCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     success_message = "Запись успешно создана!"
 
     def form_valid(self, form):
+        print("🎯 form_valid вызван")
         form.instance.author = self.request.user
-        return super().form_valid(form)  # ДОБАВЬТЕ return здесь!
+        response = super().form_valid(form)
+        print(f"✅ Запись создана: {self.object.id} - {self.object.title}")
+        return response
+
+    def form_invalid(self, form):
+        print("❌ Форма невалидна:", form.errors)
+        return super().form_invalid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -46,12 +64,12 @@ class DiaryCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         return context
 
     def get_success_url(self):
-        return reverse_lazy('dnevnik:list')  # Исправлено на 'dnevnik:list'
+        return reverse_lazy('dnevnik:list')
 
 class DiaryUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = DiaryEntry
     fields = ['title', 'content']
-    template_name = 'dnevnik/forms.html'  # Исправлено на forms.html
+    template_name = 'dnevnik/forms.html'
     success_message = "Запись успешно обновлена!"
 
     def get_queryset(self):
@@ -63,7 +81,7 @@ class DiaryUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         return context
 
     def get_success_url(self):
-        return reverse_lazy('dnevnik:list')  # Возврат к списку после редактирования
+        return reverse_lazy('dnevnik:list')
 
 class DiaryDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = DiaryEntry
@@ -75,6 +93,7 @@ class DiaryDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
 
     def get_success_url(self):
         return reverse_lazy('dnevnik:list')
+
 class DiarySearchView(LoginRequiredMixin, ListView):
     model = DiaryEntry
     template_name = 'dnevnik/search.html'
