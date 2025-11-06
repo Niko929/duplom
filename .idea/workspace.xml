@@ -4,19 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5a2af23f-7ad3-4032-872e-e8baa129d9a6" name="Changes" comment="продолжение">
+    <list default="true" id="5a2af23f-7ad3-4032-872e-e8baa129d9a6" name="Changes" comment="окончание">
       <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dnevnik/templates/dnevnik/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/dnevnik/templates/dnevnik/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dnevnik/templates/dnevnik/diary_create.html" beforeDir="false" afterPath="$PROJECT_DIR$/dnevnik/templates/dnevnik/diary_create.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dnevnik/templates/dnevnik/diary_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/dnevnik/templates/dnevnik/diary_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dnevnik/templates/dnevnik/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/dnevnik/templates/dnevnik/list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dnevnik/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/dnevnik/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dnevnik/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/dnevnik/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/templates/users/logout.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/logout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,12 +89,21 @@
       <option name="project" value="LOCAL" />
       <updated>1762097747614</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="окончание">
+      <option name="closed" value="true" />
+      <created>1762355925852</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1762355925852</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="начало" />
     <MESSAGE value="продолжение" />
-    <option name="LAST_COMMIT_MESSAGE" value="продолжение" />
+    <MESSAGE value="окончание" />
+    <option name="LAST_COMMIT_MESSAGE" value="окончание" />
   </component>
 </project>
