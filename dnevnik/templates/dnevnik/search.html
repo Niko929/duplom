@@ -1,0 +1,239 @@
+{% extends 'dnevnik/base.html' %}
+
+{% block title %}Поиск в дневнике{% endblock %}
+
+{% block content %}
+<div class="search-container">
+    <!-- Заголовок -->
+    <div class="search-header text-center mb-5">
+        <h1 class="display-5"><i class="fas fa-search me-2"></i>Поиск в дневнике</h1>
+        <p class="lead text-muted">Найдите ваши записи по ключевым словам</p>
+    </div>
+
+    <!-- Основная форма поиска -->
+    <div class="search-form card shadow-sm mb-4">
+        <div class="card-body">
+            <form method="get" action="{% url 'dnevnik:search' %}">
+                <div class="input-group input-group-lg mb-3">
+                    <input type="text"
+                           name="q"
+                           value="{{ query|default:'' }}"
+                           placeholder="Введите ключевые слова для поиска..."
+                           class="form-control"
+                           autofocus>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-search me-1"></i> Найти
+                    </button>
+                </div>
+
+                <!-- Дополнительные параметры поиска -->
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <div class="form-check">
+                            <input class="form-check-input"
+                                   type="checkbox"
+                                   name="search_title"
+                                   id="search_title"
+                                   {% if search_title == 'on' or not query %}checked{% endif %}>
+                            <label class="form-check-label" for="search_title">
+                                Искать в заголовках
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="form-check">
+                            <input class="form-check-input"
+                                   type="checkbox"
+                                   name="search_content"
+                                   id="search_content"
+                                   {% if search_content == 'on' or not query %}checked{% endif %}>
+                            <label class="form-check-label" for="search_content">
+                                Искать в содержании
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+    <!-- Быстрые ссылки -->
+    <div class="quick-links row g-3 mb-5">
+        <div class="col-md-3 col-6">
+            <a href="?q=мечты&search_title=on&search_content=on" class="card text-decoration-none h-100 quick-link-card">
+                <div class="card-body text-center">
+                    <i class="fas fa-star fa-2x text-warning mb-2"></i>
+                    <strong class="d-block">Мечты</strong>
+                    <small class="text-muted">Цели и желания</small>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3 col-6">
+            <a href="?q=планы&search_title=on&search_content=on" class="card text-decoration-none h-100 quick-link-card">
+                <div class="card-body text-center">
+                    <i class="fas fa-calendar fa-2x text-primary mb-2"></i>
+                    <strong class="d-block">Планы</strong>
+                    <small class="text-muted">Будущие события</small>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3 col-6">
+            <a href="?q=воспоминания&search_title=on&search_content=on" class="card text-decoration-none h-100 quick-link-card">
+                <div class="card-body text-center">
+                    <i class="fas fa-memory fa-2x text-success mb-2"></i>
+                    <strong class="d-block">Воспоминания</strong>
+                    <small class="text-muted">Прошлые события</small>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3 col-6">
+            <a href="?q=идеи&search_title=on&search_content=on" class="card text-decoration-none h-100 quick-link-card">
+                <div class="card-body text-center">
+                    <i class="fas fa-lightbulb fa-2x text-info mb-2"></i>
+                    <strong class="d-block">Идеи</strong>
+                    <small class="text-muted">Мысли и озарения</small>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Блок с результатами поиска -->
+    {% if query %}
+    <div class="results-container">
+        <div class="results-count card mb-3">
+            <div class="card-body py-2">
+                {% if diaries %}
+                    Найдено записей: <strong>{{ diaries.paginator.count }}</strong>
+                    {% if diaries.paginator.num_pages > 1 %}
+                        (Страница {{ diaries.number }} из {{ diaries.paginator.num_pages }})
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+
+        {% if diaries %}
+            <!-- Список результатов -->
+            <div class="results-list">
+                {% for diary in diaries %}
+                <div class="card mb-3 result-item">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h5 class="card-title mb-0">
+                                <a href="{% url 'dnevnik:diary_detail' diary.pk %}" class="text-decoration-none">
+                                    {{ diary.title }}
+                                </a>
+                            </h5>
+                            <small class="text-muted">{{ diary.created_at|date:"d.m.Y H:i" }}</small>
+                        </div>
+
+                        <p class="card-text text-muted result-snippet">
+                            {{ diary.content|truncatewords:40 }}
+                        </p>
+
+                        <div class="result-meta d-flex gap-3 text-muted small">
+                            <span>
+                                <i class="fas fa-calendar me-1"></i>
+                                {{ diary.created_at|date:"d.m.Y" }}
+                            </span>
+                            {% if diary.updated_at != diary.created_at %}
+                            <span>
+                                <i class="fas fa-edit me-1"></i>
+                                Обновлено: {{ diary.updated_at|date:"d.m.Y" }}
+                            </span>
+                            {% endif %}
+                        </div>
+
+                        <div class="mt-3">
+                            <a href="{% url 'dnevnik:diary_detail' diary.pk %}" class="btn btn-sm btn-outline-primary me-2">
+                                <i class="fas fa-eye me-1"></i> Читать
+                            </a>
+                            <a href="{% url 'dnevnik:edit' diary.pk %}" class="btn btn-sm btn-outline-warning">
+                                <i class="fas fa-edit me-1"></i> Редактировать
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Пагинация -->
+            {% if diaries.has_other_pages %}
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    {% if diaries.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?q={{ query }}&page={{ diaries.previous_page_number }}{% if search_title %}&search_title=on{% endif %}{% if search_content %}&search_content=on{% endif %}">
+                                ← Назад
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% for num in diaries.paginator.page_range %}
+                        {% if diaries.number == num %}
+                            <li class="page-item active">
+                                <span class="page-link">{{ num }}</span>
+                            </li>
+                        {% else %}
+                            <li class="page-item">
+                                <a class="page-link" href="?q={{ query }}&page={{ num }}{% if search_title %}&search_title=on{% endif %}{% if search_content %}&search_content=on{% endif %}">
+                                    {{ num }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if diaries.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?q={{ query }}&page={{ diaries.next_page_number }}{% if search_title %}&search_title=on{% endif %}{% if search_content %}&search_content=on{% endif %}">
+                                Вперед →
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+
+        {% else %}
+            <div class="no-results text-center py-5">
+                <div class="mb-4">
+                    <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                    <h3>Ничего не найдено</h3>
+                </div>
+                <p class="text-muted">По запросу "<strong>{{ query }}</strong>" записей не найдено.</p>
+                <p>Попробуйте:</p>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-check text-success me-2"></i>Проверить правильность написания</li>
+                    <li><i class="fas fa-check text-success me-2"></i>Использовать другие ключевые слова</li>
+                    <li><i class="fas fa-check text-success me-2"></i>Упростить запрос</li>
+                    <li><i class="fas fa-check text-success me-2"></i>Искать в разных полях (заголовок/содержание)</li>
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <!-- Популярные запросы -->
+    {% if not query %}
+    <div class="recent-searches mt-5">
+        <h4 class="text-center mb-3">Популярные темы</h4>
+        <div class="d-flex flex-wrap justify-content-center gap-2">
+            <span class="badge bg-light text-dark p-2 cursor-pointer recent-tag"
+                  onclick="document.querySelector('input[name=q]').value = this.textContent; document.querySelector('form').submit();">
+                сны
+            </span>
+            <span class="badge bg-light text-dark p-2 cursor-pointer recent-tag"
+                  onclick="document.querySelector('input[name=q]').value = this.textContent; document.querySelector('form').submit();">
+                цели
+            </span>
+            <span class="badge bg-light text-dark p-2 cursor-pointer recent-tag"
+                  onclick="document.querySelector('input[name=q]').value = this.textContent; document.querySelector('form').submit();">
+                размышления
+            </span>
+            <span class="badge bg-light text-dark p-2 cursor-pointer recent-tag"
+                  onclick="document.querySelector('input[name=q]').value = this.textContent; document.querySelector('form').submit();">
+                эмоции
+            </span>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

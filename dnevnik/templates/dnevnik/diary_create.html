@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}Новая запись в дневнике{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h2 class="text-center mb-0">
+                    <i class="fas fa-book me-2"></i>Новая запись в дневнике
+                </h2>
+            </div>
+            <div class="card-body">
+                <form method="post" id="diaryForm">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Заголовок записи</label>
+                        <input type="text"
+                               class="form-control"
+                               id="title"
+                               name="title"
+                               placeholder="Введите заголовок вашей записи"
+                               value="{{ form.title.value|default:'' }}"
+                               required>
+                        {% if form.title.errors %}
+                            <div class="text-danger small mt-1">{{ form.title.errors }}</div>
+                        {% endif %}
+                        <div class="form-text">
+                            Придумайте понятный заголовок, который отражает суть записи
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="content" class="form-label">Содержание записи</label>
+                        <textarea class="form-control"
+                                  id="content"
+                                  name="content"
+                                  rows="12"
+                                  placeholder="Опишите ваши мысли, события дня, планы или важные моменты..."
+                                  required>{{ form.content.value|default:'' }}</textarea>
+                        {% if form.content.errors %}
+                            <div class="text-danger small mt-1">{{ form.content.errors }}</div>
+                        {% endif %}
+                        <div class="form-text">
+                            Не стесняйтесь выражать свои мысли - это ваш личный дневник
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-save me-2"></i>Сохранить запись
+                        </button>
+                        <a href="{% url 'dnevnik:list' %}" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>Вернуться к дневнику
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
